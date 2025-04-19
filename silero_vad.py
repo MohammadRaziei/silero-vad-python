@@ -40,7 +40,7 @@ class SileroVad:
         self.min_silence_samples = min_silence_ms * sample_rate // 1000
         self.min_silence_samples_at_max_speech = 98 * sample_rate // 1000
         self.min_speech_samples = min_speech_ms * sample_rate // 1000
-
+        # --- fix for infinity ---
         if np.isinf(max_speech_s):
             self.max_speech_samples = np.iinfo(np.int64).max
         else:
