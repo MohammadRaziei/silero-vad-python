@@ -8,15 +8,15 @@ SILERO_VAD_URL_BASE = "https://raw.githubusercontent.com/snakers4/silero-vad/mas
 SILERO_VAD_PATH = Path(__file__).parent / "resources"
 
 class SileroVadType(enum.StrEnum):
-    silero_vad: str = "silero_vad.onnx"
-    silero_vad_16k_op15: str = "silero_vad_16k_op15.onnx"
-    silero_vad_half: str = "silero_vad_half.onnx"
+    silero_vad: str = "silero_vad"
+    silero_vad_16k_op15: str = "silero_vad_16k_op15"
+    silero_vad_half: str = "silero_vad_half"
 
     def url(self):
-        return SILERO_VAD_URL_BASE + self.value
+        return SILERO_VAD_URL_BASE + self.value + ".onnx"
 
     def path(self):
-        return SILERO_VAD_PATH / self.value
+        return SILERO_VAD_PATH / (self.value + ".onnx")
 
 class SileroVad:
     def __init__(
