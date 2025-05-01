@@ -3,7 +3,6 @@ import onnxruntime as ort
 import soundfile as sf
 from pathlib import Path
 import enum
-import typing
 from silero_vad.model_types import SileroVadType
 from silero_vad.utils.download import download_file
 
@@ -102,13 +101,13 @@ class SileroVad:
         self._update_max_speech_samples() # max_speech_samples depends on speech_pad_samples
         return self
 
-    def set_min_speech_ms(self, min_speech_ms: int) -> typing.Self:
+    def set_min_speech_ms(self, min_speech_ms: int):
         """Sets the minimum speech duration in milliseconds."""
         self.min_speech_ms = min_speech_ms
         self.min_speech_samples = min_speech_ms * self.sample_rate // 1000
         return self
 
-    def set_max_speech_s(self, max_speech_s: float) -> typing.Self:
+    def set_max_speech_s(self, max_speech_s: float):
         """Sets the maximum speech duration in seconds."""
         self.max_speech_s = max_speech_s
         self._update_max_speech_samples() # Update the derived sample count
