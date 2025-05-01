@@ -1,6 +1,3 @@
-import enum
-from pathlib import Path
-
 import numpy as np
 import onnxruntime as ort
 import soundfile as sf
@@ -271,5 +268,5 @@ class SileroVad:
             # import librosa
             # wav = librosa.resample(wav, orig_sr=sr, target_sr=self.sample_rate)
             # logger.warning(f"Resampling audio from {sr} Hz to {self.sample_rate} Hz")
-            raise ValueError(f"Input audio sample rate ({sr}) must match VAD sample rate ({self.sample_rate}). Consider resampling.")
+            raise ValueError(f"Input audio sample rate ({sr}) must match VAD sample rate")
         return self.process(wav)

@@ -1,10 +1,7 @@
-import enum
 import logging
 import urllib.request
 from pathlib import Path
 from urllib.parse import urlparse
-
-from silero_vad.model_types import SileroVadType
 
 logger = logging.getLogger(__name__)
 

@@ -24,7 +24,7 @@ def test_vad_path_exists():
 
 def test_model_type_values():
     """Test if all expected model types are present"""
-    model_types = set(model.value for model in SileroVadType)
+    model_types = {model.value for model in SileroVadType}
     expected_types = {
         "silero_vad",
         "silero_vad_16k_op15",
