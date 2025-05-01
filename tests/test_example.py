@@ -1,8 +1,11 @@
-import pytest
 import logging
 from pathlib import Path
+
+import pytest
+
 from silero_vad import SileroVad, SileroVadType
 from silero_vad.utils.download import download_file
+
 
 @pytest.fixture
 def audio_url():

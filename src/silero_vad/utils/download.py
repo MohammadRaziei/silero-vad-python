@@ -1,8 +1,8 @@
+import enum
+import logging
 import urllib.request
 from pathlib import Path
 from urllib.parse import urlparse
-import enum
-import logging
 
 from silero_vad.model_types import SileroVadType
 

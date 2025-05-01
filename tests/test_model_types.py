@@ -1,6 +1,9 @@
-import pytest
 from pathlib import Path
-from silero_vad.model_types import SileroVadType, SILERO_VAD_URL_BASE, SILERO_VAD_PATH
+
+import pytest
+
+from silero_vad.model_types import SILERO_VAD_PATH, SILERO_VAD_URL_BASE, SileroVadType
+
 
 def test_silero_vad_url():
     """Test if URLs are correctly formed for each model type"""

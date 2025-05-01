@@ -1,9 +1,10 @@
 import logging
+
 from silero_vad import SileroVad, SileroVadType
 from silero_vad.utils.download import download_file
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 
 logger = logging.getLogger(__name__)

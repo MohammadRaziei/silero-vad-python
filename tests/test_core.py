@@ -1,7 +1,9 @@
-import pytest
 import numpy as np
+import pytest
+
 from silero_vad import SileroVad
 from silero_vad.model_types import SileroVadType
+
 
 @pytest.fixture
 def vad():
@@ -38,7 +40,7 @@ def test_state_management(vad):
     """Test state initialization and reset"""
     assert vad._state.shape == (2, 1, 128)
     assert vad._context.shape == (64,)
-    
+
     # Test reset states
     vad._state.fill(1.0)
     vad._context.fill(1.0)
@@ -63,40 +65,40 @@ def test_process_silent_audio(vad, duration_sec):
 def test_process_file_mono(vad, tmp_path):
     """Test processing a mono audio file"""
     import soundfile as sf
-    
+
     # Create a temporary mono audio file
     audio_path = tmp_path / "test_mono.wav"
     samples = np.zeros(16000, dtype=np.float32)  # 1 second of silence
     sf.write(audio_path, samples, 16000)
-    
+
     result = vad.process_file(audio_path)
     assert isinstance(result, list)
 
 def test_process_file_stereo(vad, tmp_path):
     """Test processing a stereo audio file"""
     import soundfile as sf
-    
+
     # Create a temporary stereo audio file
     audio_path = tmp_path / "test_stereo.wav"
     samples = np.zeros((16000, 2), dtype=np.float32)  # 1 second of stereo silence
     sf.write(audio_path, samples, 16000)
-    
+
     result = vad.process_file(audio_path)
     assert isinstance(result, list)
 
 def test_invalid_sample_rate(tmp_path):
     """Test handling of audio with mismatched sample rate"""
     import soundfile as sf
-    
+
     # Create audio file with different sample rate
     audio_path = tmp_path / "test_44100.wav"
     samples = np.zeros(44100, dtype=np.float32)
     sf.write(audio_path, samples, 44100)
-    
+
     vad = SileroVad(
         model_type=SileroVadType.silero_vad,
         sample_rate=16000
     )
-    
+
     with pytest.raises(ValueError):
         vad.process_file(audio_path)

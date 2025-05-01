@@ -1,10 +1,13 @@
+import enum
+from pathlib import Path
+
 import numpy as np
 import onnxruntime as ort
 import soundfile as sf
-from pathlib import Path
-import enum
+
 from silero_vad.model_types import SileroVadType
 from silero_vad.utils.download import download_file
+
 
 class SileroVad:
     def __init__(
@@ -17,7 +20,7 @@ class SileroVad:
         self.sample_rate = sample_rate
         self.model_path = str(model_type.path())
         download_file(self.model_type.url(), output_path=self.model_type.path())
-        
+
 
         # --- Fixed internal parameters ---
         self.context_samples = 64 # Specific to this model architecture
