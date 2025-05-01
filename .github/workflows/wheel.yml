@@ -53,7 +53,6 @@ jobs:
 
   pre_release:
     name: Pre-release
-#    description: Running linter and checking the wheels
     needs: [ build_wheel ]
     runs-on: ubuntu-latest
     steps:
@@ -71,7 +70,7 @@ jobs:
           name: wheels
           path: dist
 
-      - name: Ruff Check # TODO: remove this
+      - name: Ruff Check 
         uses: jpetrucciani/ruff-check@main
 
       - name: Check metadata
@@ -80,7 +79,6 @@ jobs:
 
   upload_all:
     name: Release
-#    description: Upload if release
     needs: [pre_release]
     runs-on: ubuntu-latest
     if: github.event_name == 'release' && github.event.action == 'published'
@@ -88,7 +86,7 @@ jobs:
     steps:
     - uses: actions/download-artifact@v4
       with:
-        name: artifact
+        name: wheels
         path: dist
 
     - name: Publish package to PyPI
