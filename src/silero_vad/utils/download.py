@@ -4,6 +4,8 @@ from urllib.parse import urlparse
 import enum
 import logging
 
+from silero_vad.model_types import SileroVadType
+
 logger = logging.getLogger(__name__)
 
 def download_file(url, output_path="", force=False):
@@ -27,23 +29,4 @@ def download_file(url, output_path="", force=False):
     logger.info(f"Downloaded {url} to {output_path}")
 
 
-SILERO_VAD_URL_BASE = "https://raw.githubusercontent.com/snakers4/silero-vad/master/src/silero_vad/data/"
-SILERO_VAD_PATH = Path(__file__).parent / "resources"
 
-class SileroVadType(enum.StrEnum):
-    silero_vad: str = "silero_vad.onnx"
-    silero_vad_16k_op15: str = "silero_vad_16k_op15.onnx"
-    silero_vad_half: str = "silero_vad_half.onnx"
-
-    def url(self):
-        return SILERO_VAD_URL_BASE + self.value
-
-    def path(self):
-        return SILERO_VAD_PATH / self.value
-
-def silero_download(type: SileroVadType = SileroVadType.silero_vad, output_path: Path = SILERO_VAD_PATH, force: bool = False):
-    download_file(url=type.url(), output_path=output_path, force=force) 
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    silero_download()

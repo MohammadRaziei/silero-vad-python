@@ -1,18 +1,21 @@
-# silero-vad-python
+# silero-vad-python-clean
 
-![Silero VAD Logo](./silero-vad.svg)
+<!--[![PyPI - Version](https://img.shields.io/pypi/v/behsan-text-to-vec.svg)](https://pypi.org/project/behsan-text-to-vec)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/behsan-text-to-vec.svg)](https://pypi.org/project/behsan-text-to-vec)
+-->
+-----
 
-A Python wrapper for the Silero Voice Activity Detector (VAD) model, providing an easy-to-use interface and command-line tools for detecting speech segments in audio files.
+**Table of Contents**
+
+- [Installation](#installation)
+- [License](#license)
 
 ## Installation
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/MohammadRaziei/silero-vad-python
-    cd silero-vad-python
-    ```
+```console
+pip install silero-vad-python-clean
+```
 
-2.  **Install dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
+## License
+
+`silero-vad-python-clean` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.

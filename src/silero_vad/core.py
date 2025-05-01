@@ -3,20 +3,9 @@ import onnxruntime as ort
 import soundfile as sf
 from pathlib import Path
 import enum
-
-SILERO_VAD_URL_BASE = "https://raw.githubusercontent.com/snakers4/silero-vad/master/src/silero_vad/data/"
-SILERO_VAD_PATH = Path(__file__).parent / "resources"
-
-class SileroVadType(enum.StrEnum):
-    silero_vad: str = "silero_vad"
-    silero_vad_16k_op15: str = "silero_vad_16k_op15"
-    silero_vad_half: str = "silero_vad_half"
-
-    def url(self):
-        return SILERO_VAD_URL_BASE + self.value + ".onnx"
-
-    def path(self):
-        return SILERO_VAD_PATH / (self.value + ".onnx")
+import typing
+from silero_vad.model_types import SileroVadType
+from silero_vad.utils.download import download_file
 
 class SileroVad:
     def __init__(
@@ -28,6 +17,8 @@ class SileroVad:
         self.model_type = model_type
         self.sample_rate = sample_rate
         self.model_path = str(model_type.path())
+        download_file(self.model_type.url(), output_path=self.model_type.path())
+        
 
         # --- Fixed internal parameters ---
         self.context_samples = 64 # Specific to this model architecture
@@ -37,8 +28,8 @@ class SileroVad:
 
         # --- Initialize configurable parameters via setters with defaults ---
         # Initialize base values first
-        self.window_ms = 32
-        self.threshold = 0.5
+        self.window_ms: float = 32
+        self.threshold: float = 0.5
         self.min_silence_ms = 100
         self.speech_pad_ms = 30
         self.min_speech_ms = 250
@@ -111,13 +102,13 @@ class SileroVad:
         self._update_max_speech_samples() # max_speech_samples depends on speech_pad_samples
         return self
 
-    def set_min_speech_ms(self, min_speech_ms: int):
+    def set_min_speech_ms(self, min_speech_ms: int) -> typing.Self:
         """Sets the minimum speech duration in milliseconds."""
         self.min_speech_ms = min_speech_ms
         self.min_speech_samples = min_speech_ms * self.sample_rate // 1000
         return self
 
-    def set_max_speech_s(self, max_speech_s: float):
+    def set_max_speech_s(self, max_speech_s: float) -> typing.Self:
         """Sets the maximum speech duration in seconds."""
         self.max_speech_s = max_speech_s
         self._update_max_speech_samples() # Update the derived sample count

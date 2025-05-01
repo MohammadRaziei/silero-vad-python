@@ -1,21 +1,12 @@
 import logging
-# from rich.logging import RichHandler
-# from rich.console import Console
-from silero_vad_new import SileroVad, SileroVadType
-from download import download_file
+from silero_vad import SileroVad, SileroVadType
+from silero_vad.utils.download import download_file
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# Configure logging using RichHandler
-# logging.basicConfig(
-#     level=logging.INFO,
-#     # format='%(asctime)s - %(levelname)s - %(message)s', # RichHandler handles formatting like timestamp and level
-#     # datefmt="[%X]",       # Optional: format for time if needed by handler
-#     handlers=[RichHandler(rich_tracebacks=True, markup=True)] # Use RichHandler
-# )
+
 logger = logging.getLogger(__name__)
-# console = Console() # Create a console object for direct colored printing if needed
 
 logger.info("Starting VAD processing...")
 
