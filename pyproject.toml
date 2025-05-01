@@ -3,7 +3,7 @@ requires = ["hatchling", "hatch-requirements-txt"]
 build-backend = "hatchling.build"
 
 [project]
-name = "silero-vad-python-clean"
+name = "silero-vad-python"
 dynamic = ["version", "dependencies"]
 description = ""
 readme = "README.md"
